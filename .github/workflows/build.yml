@@ -1,0 +1,19 @@
+name: "Build Flake"
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-x86_64-linux:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: cachix/install-nix-action@v18
+      with:
+        extra_nix_config: |
+          access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
+    - uses: DeterminateSystems/magic-nix-cache-action@main
+    - run: nix flake check
+
