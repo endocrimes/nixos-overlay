@@ -42,7 +42,6 @@
       nixosModules.default = import ./modules/default.nix;
 
       packages = usePkgs (pkgs: {
-        pkgsDebug = pkgs; # Useful for building anything from pkgs, including nixos-overlay
         overlayPkgs = pkgs.symlinkJoin {
           name = "nixos-overlay-all-packages";
           paths = with pkgs; [
